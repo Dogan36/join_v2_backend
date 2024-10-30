@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from join.models import Category, Task, Subtask
-from .serializers import CategorySerializer, TaskSerializer, SubtaskSerializer, UserSerializer
+from join.models import Category, Task, Subtask, Profile, User
+from .serializers import CategorySerializer, TaskSerializer, SubtaskSerializer, UserSerializer, ProfileSerializer
 from django.contrib.auth.models import User
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -18,3 +18,7 @@ class TaskViewSet(viewsets.ModelViewSet):
 class SubtaskViewSet(viewsets.ModelViewSet):
     queryset = Subtask.objects.all()
     serializer_class = SubtaskSerializer
+    
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer

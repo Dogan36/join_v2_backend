@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from join.models import Category, Task, Subtask, User, Color, TaskHistory
+from join.models import Category, Task, Subtask, User, Color, TaskHistory, Profile
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,6 +10,14 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'first_name', 'last_name']
+
+class ProfileSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+    color = ColorSerializer(read_only=True)
+
+    class Meta:
+        model = Profile
+        fields = ['id', 'user', 'initials', 'color']
 
 class CategorySerializer(serializers.ModelSerializer):
     users = UserSerializer(many=True, read_only=True)

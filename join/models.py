@@ -11,7 +11,13 @@ class Color(models.Model):
     def __str__(self):
         return self.name
     
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    initials = models.CharField(max_length=2)
+    color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True)
 
+    def __str__(self):
+        return self.user.username
     
 class Category(models.Model):
     name = models.CharField(max_length=100)
