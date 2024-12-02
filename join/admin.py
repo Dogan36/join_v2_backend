@@ -8,4 +8,5 @@ admin.site.register(Task)
 admin.site.register(Subtask)
 admin.site.register(TaskHistory)
 
+
 # Register your models here.

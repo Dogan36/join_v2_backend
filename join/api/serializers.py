@@ -6,6 +6,8 @@ class ColorSerializer(serializers.ModelSerializer):
         model = Color
         fields = ['id', 'name', 'code']
 
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -17,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'initials', 'color']
+        fields = ['id', 'user', 'avatar', 'color']
 
 class CategorySerializer(serializers.ModelSerializer):
     users = UserSerializer(many=True, read_only=True)

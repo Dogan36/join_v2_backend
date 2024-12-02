@@ -4,6 +4,8 @@ from os import name
 from django.db import models
 from django.contrib.auth.models import User
 
+
+
 class Color(models.Model):
     name = models.CharField(max_length=100)
     code = models.CharField(max_length=7)  # Hex-Farbcode, z.B. #FFFFFF

@@ -7,12 +7,12 @@ from ..models import Profile, Color
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         default_color = Color.objects.first()  # Wähle eine Standardfarbe aus
-        initials = ''
+        avatar = ''
         if instance.first_name:
-            initials += instance.first_name[0].upper()
+            avatar += instance.first_name[0].upper()
         if instance.last_name:
-            initials += instance.last_name[0].upper()
-        Profile.objects.create(user=instance, color=default_color, initials=initials)
+            avatar += instance.last_name[0].upper()
+        Profile.objects.create(user=instance, color=default_color, avatar=avatar)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
