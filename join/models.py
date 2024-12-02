@@ -13,7 +13,7 @@ class Color(models.Model):
     
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    initials = models.CharField(max_length=2)
+    avatar = models.CharField(max_length=2)
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
