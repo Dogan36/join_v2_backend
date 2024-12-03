@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from join.models import Category, Task, Subtask, User, Color, TaskHistory, Profile
+from join.models import Category, Task, Subtask, User, Color, Profile
 
 class ColorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,20 +34,14 @@ class SubtaskSerializer(serializers.ModelSerializer):
         model = Subtask
         fields = ['id', 'name', 'done']
 
-class TaskHistorySerializer(serializers.ModelSerializer):
-    user = UserSerializer(read_only=True)
 
-    class Meta:
-        model = TaskHistory
-        fields = ['id', 'user', 'timestamp', 'change_description']
 
 class TaskSerializer(serializers.ModelSerializer):
     subtasks = SubtaskSerializer(many=True)
-    history = TaskHistorySerializer(many=True, read_only=True)
 
     class Meta:
         model = Task
-        fields = ['id', 'name', 'description', 'duedate', 'category', 'status', 'subtasks', 'history']
+        fields = ['id', 'name', 'description', 'duedate', 'category', 'status', 'subtasks',]
 
     def create(self, validated_data):
         subtasks_data = validated_data.pop('subtasks')
@@ -55,7 +49,7 @@ class TaskSerializer(serializers.ModelSerializer):
         task = Task.objects.create(**validated_data)
         for subtask_data in subtasks_data:
             Subtask.objects.create(task=task, **subtask_data)
-        TaskHistory.objects.create(task=task, user=user, change_description='Task created')
+        
         return task
 
     def update(self, instance, validated_data):
@@ -78,5 +72,5 @@ class TaskSerializer(serializers.ModelSerializer):
             else:
                 Subtask.objects.create(task=instance, **subtask_data)
 
-        TaskHistory.objects.create(task=instance, user=user, change_description='Task updated')
+        
         return instance
