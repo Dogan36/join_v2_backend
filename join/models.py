@@ -14,7 +14,7 @@ class Color(models.Model):
         return self.name
     
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     avatar = models.CharField(max_length=2)
     color = models.ForeignKey(Color, on_delete=models.SET_NULL, null=True, blank=True)
 
