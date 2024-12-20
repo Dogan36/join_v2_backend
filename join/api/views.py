@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from join.models import Category, Task, Subtask, Profile, User
-from .serializers import CategorySerializer, TaskSerializer, SubtaskSerializer, UserSerializer, ProfileSerializer
+from join.models import Category, Task, Subtask, Profile, User, Color
+from .serializers import CategorySerializer, TaskSerializer, SubtaskSerializer, UserSerializer, ProfileSerializer, ColorSerializer
 from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 
@@ -24,3 +24,7 @@ class SubtaskViewSet(viewsets.ModelViewSet):
 class ProfileViewSet(viewsets.ModelViewSet):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+    
+class ColorViewSet(viewsets.ModelViewSet):
+    queryset = Color.objects.all()
+    serializer_class = ColorSerializer

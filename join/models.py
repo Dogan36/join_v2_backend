@@ -24,7 +24,6 @@ class Profile(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=100)
     color = models.ForeignKey(Color, on_delete=models.CASCADE)
-    users = models.ManyToManyField(User, related_name='categories')
 
     def __str__(self):
         return self.name
